@@ -4,8 +4,6 @@ import flet as ft
 import time
 import threading
 
-
-
 class Cronometro:
     def __init__(self, page: ft.Page):
         self.page = page
@@ -14,14 +12,13 @@ class Cronometro:
         self.time_elapsed = 0
         self.interval = 5  # Default interval in seconds for the sound to play
 
-        self.sound = ft.Audio(src="gym_app\assets\blip.mp3")
+        self.sound = ft.Audio(src="https://github.com/AlissoNNunes1/gym_app/raw/main/assets/blip.mp3")
         page.overlay.append(self.sound)
 
-
         self.timer_label = ft.Text(value="00:00:00", size=30)
-        self.start_button = ft.FloatingActionButton(text="Start", on_click=self.start_timer)
-        self.pause_button = ft.FloatingActionButton(text="Pause", on_click=self.pause_timer, )
-        self.stop_button = ft.FloatingActionButton(text="Stop", on_click=self.stop_timer, )
+        self.start_button = ft.FloatingActionButton(icon=ft.icons.PLAY_ARROW, on_click=self.start_timer)
+        self.pause_button = ft.FloatingActionButton(icon=ft.icons.PAUSE, on_click=self.pause_timer)
+        self.stop_button = ft.FloatingActionButton(icon=ft.icons.STOP, on_click=self.stop_timer)
         self.interval_input = ft.TextField(label="Interval (seconds)", value=str(self.interval), on_change=self.update_interval)
 
         self.layout = ft.Column([
@@ -31,6 +28,9 @@ class Cronometro:
         ])
 
         self.page.add(ft.SafeArea(self.layout))
+
+        # Aplicando alinhamento ao cronômetro
+        self.layout.alignment = ft.alignment.top_center  # Top center alignment
 
     def update_timer_label(self):
         hours, remainder = divmod(self.time_elapsed, 3600)
