@@ -1,12 +1,9 @@
 # main.py
 
-import flet as ft
-from components.navbar import Navbar
-from components.cronometro import Cronometro
+from flet import app, Page
+from views.main_view import main_view
 
-def main(page: ft.Page):
-    cronometro = Cronometro(page)
-    Navbar(page)
-    page.add(ft.SafeArea(ft.Text("Hello, Flet!")))
+def main(page: Page):
+    main_view(page)
 
-ft.app(target=main)
+app(target=main)
