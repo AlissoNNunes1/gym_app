@@ -1,4 +1,4 @@
-# controllers.py
+# controllers/data.py
 import json
 
 def salvar_dados(usuario, filename="dados.json"):

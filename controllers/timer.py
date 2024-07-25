@@ -1,4 +1,4 @@
-# controllers.py
+# controllers/timer.py
 import time
 
 class Cronometro:

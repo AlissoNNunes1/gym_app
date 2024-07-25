@@ -1,31 +1,15 @@
+# views.main_view.py
 import flet as ft
 from models.usuario import Usuario
-from treino_view import treino_view
-from exercicio_view import exercicio_view
-from timer_view import cronometro_view
+from views.lista_treinos_view import lista_treinos_view
 
 def main_view(page: ft.Page):
-    usuario = Usuario()
+    usuario = Usuario()  # Carregar usuário a partir de dados salvos pode ser implementado aqui
     page.title = "Gym App"
-    
-    treino_selecionado = None
 
-    def selecionar_treino(treino):
-        nonlocal treino_selecionado
-        treino_selecionado = treino
-        exercicios_list_view.controls.clear()
-        for exercicio in treino.exercicios:
-            exercicios_list_view.controls.append(ft.Text(f"Exercício: {exercicio.nome}, Séries: {exercicio.series}, Repetições: {exercicio.repeticoes}"))
+    def atualizar_treinos():
+        page.controls.clear()
+        page.add(lista_treinos_view(page, usuario))
         page.update()
 
-    treino_section = treino_view(page, usuario, selecionar_treino)
-    exercicio_section = exercicio_view(page, treino_selecionado)
-    cronometro_section = cronometro_view(page)
-
-    page.add(
-        ft.Column([
-            treino_section,
-            exercicio_section,
-            cronometro_section
-        ])
-    )
+    atualizar_treinos()
